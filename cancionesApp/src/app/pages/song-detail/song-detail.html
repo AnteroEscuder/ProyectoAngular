@@ -1,0 +1,19 @@
+<div class="container mt-4" *ngIf="isLoading">
+  <div class="alert alert-info">Cargando canción...</div>
+</div>
+
+<div class="container mt-4" *ngIf="!isLoading && song">
+  <div class="card">
+    <img [src]="song.album.cover" class="card-img-top" alt="{{ song.title }}">
+    <div class="card-body">
+      <h2 class="card-title">{{ song.title }}</h2>
+      <p class="card-text"><strong>Artista:</strong> {{ song.artist.name }}</p>
+      <p class="card-text"><strong>Álbum:</strong> {{ song.album.title }}</p>
+      <audio [src]="song.preview" controls class="w-100"></audio>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4" *ngIf="!isLoading && hasError">
+  <div class="alert alert-danger">Canción no encontrada.</div>
+</div>
