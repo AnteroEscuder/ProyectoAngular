@@ -1,1 +1,58 @@
-<p>home works!</p>
+<div class="container py-5">
+
+  <!-- Título animado -->
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-bold animate__animated animate__fadeInDown">
+      🎧 ¡Descubre las canciones más populares del momento!
+    </h1>
+    <p class="lead text-muted animate__animated animate__fadeInUp animate__delay-1s">
+      Reproduce, explora y disfruta de la mejor música 🎶
+    </p>
+  </div>
+
+  <!-- Carrusel -->
+  <div id="carouselTopSongs" class="carousel slide mb-5 animate__animated animate__zoomIn" data-bs-ride="carousel">
+    <div class="carousel-inner rounded shadow">
+      <div
+        class="carousel-item"
+        [class.active]="i === 0"
+        *ngFor="let song of featured; index as i">
+        <img [src]="song.album.cover_big" class="d-block w-100" [alt]="song.title">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>{{ song.title }}</h5>
+          <p>{{ song.artist.name }}</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTopSongs" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselTopSongs" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- Lista de canciones -->
+  <h2 class="mb-4 text-center animate__animated animate__fadeInUp">🔥 Canciones más escuchadas</h2>
+  <div class="list-group shadow rounded-3 animate__animated animate__fadeInUp animate__delay-1s">
+    <a
+      *ngFor="let song of topSongs"
+      class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+      (click)="abrirModal(song)">
+      <div>
+        <h6 class="mb-1">{{ song.title }}</h6>
+        <small class="text-muted">{{ song.artist.name }}</small>
+      </div>
+      <img [src]="song.album.cover_small" alt="Cover" class="img-fluid rounded" width="50">
+    </a>
+
+    <app-modal-reproductor
+      [song]="selectedSong"
+      [visible]="showModal"
+      (cerrado)="cerrarModal()"
+    ></app-modal-reproductor>
+
+  </div>
+
+</div>

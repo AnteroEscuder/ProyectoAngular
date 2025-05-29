@@ -1,24 +1,45 @@
 <div class="container mt-4">
   <h2 class="mb-3">Buscar canciones</h2>
+
+  <!-- Formulario de búsqueda -->
   <form (ngSubmit)="searchSongs()" class="mb-4">
     <div class="input-group">
-      <input type="text" class="form-control" [(ngModel)]="query" name="query" placeholder="Ej: Coldplay, Metallica, etc." />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="query"
+        name="query"
+        placeholder="Ej: Coldplay, Metallica, etc." />
       <button type="submit" class="btn btn-primary">Buscar</button>
     </div>
   </form>
 
+  <!-- Resultados -->
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let song of songs">
-      <div class="card h-100">
-        <img [src]="song.album.cover" class="card-img-top" alt="{{ song.title }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ song.title }}</h5>
-          <p class="card-text">{{ song.artist.name }} - {{ song.album.title }}</p>
+      <a
+        [routerLink]="['/songs', song.id]"
+        class="text-decoration-none text-dark">
+
+        <div class="card h-100 hover-shadow">
+          <img
+            [src]="song.album.cover"
+            class="card-img-top"
+            [alt]="song.title" />
+
+          <div class="card-body">
+            <h5 class="card-title">{{ song.title }}</h5>
+            <p class="card-text">
+              {{ song.artist.name }} – {{ song.album.title }}
+            </p>
+          </div>
+
+          <div class="card-footer bg-white border-top-0">
+            <audio [src]="song.preview" controls class="w-100"></audio>
+          </div>
         </div>
-        <div class="card-footer">
-          <audio [src]="song.preview" controls class="w-100"></audio>
-        </div>
-      </div>
+
+      </a>
     </div>
   </div>
 </div>

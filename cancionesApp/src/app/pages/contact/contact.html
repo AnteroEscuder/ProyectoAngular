@@ -1,1 +1,94 @@
-<p>contact works!</p>
+<div class="container pt-5" *ngIf="sended">
+  <app-alerta
+    *ngIf="sended"
+    [tipo]="'info'"
+    [mensaje]="'Formulario enviado correctamente'"
+    (cerrado)="onAlertaCerrada()">
+  </app-alerta>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+
+    <div *ngIf="errores.length > 0" class="alert alert-danger mb-4">
+      <ul class="mb-0">
+        <li *ngFor="let error of errores">{{ error }}</li>
+      </ul>
+    </div>
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-body p-5">
+          <h2 class="text-center mb-4">Contáctanos</h2>
+          <form #contactForm="ngForm" (ngSubmit)="enviarFormulario()" novalidate>
+
+            <!-- Nombre -->
+            <div class="form-floating mb-4">
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                class="form-control rounded-3"
+                placeholder="Tu nombre"
+                required
+                [(ngModel)]="nombre"
+                #nombreField="ngModel"
+              >
+              <label for="nombre">Nombre</label>
+              <div *ngIf="nombreField.invalid && nombreField.touched" class="form-text text-danger">
+                Por favor, introduce tu nombre.
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-floating mb-4">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control rounded-3"
+                placeholder="nombre@ejemplo.com"
+                required
+                [(ngModel)]="email"
+                #emailField="ngModel"
+              >
+              <label for="email">Correo electrónico</label>
+              <div *ngIf="emailField.invalid && emailField.touched" class="form-text text-danger">
+                Introduce un email válido.
+              </div>
+            </div>
+
+            <!-- Mensaje -->
+            <div class="form-floating mb-4">
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                class="form-control rounded-3"
+                placeholder="Escribe tu mensaje aquí..."
+                style="height: 120px"
+                required
+                [(ngModel)]="mensaje"
+                #mensajeField="ngModel"
+              ></textarea>
+              <label for="mensaje">Mensaje</label>
+              <div *ngIf="mensajeField.invalid && mensajeField.touched" class="form-text text-danger">
+                Escribe un mensaje.
+              </div>
+            </div>
+
+            <!-- Botón -->
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg rounded-pill"
+                [disabled]="!contactForm.valid"
+              >
+                Enviar mensaje
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div
+  class="modal-backdrop fade show"
+  *ngIf="visible"
+  (click)="cerrar()">
+</div>
+
+<div
+  class="modal fade show d-block"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="visible"
+  style="background-color: rgba(0,0,0,0.5);"
+  (click)="cerrar()">
+
+  <div class="modal-dialog modal-dialog-centered modal-lg" (click)="$event.stopPropagation()">
+    <div class="modal-content border-0 shadow rounded-4">
+
+      <div class="modal-header">
+        <h5 class="modal-title">{{ song?.title }}</h5>
+        <button type="button" class="btn-close" (click)="cerrar()"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <img [src]="song?.album?.cover_big" class="img-fluid rounded mb-3" style="max-height: 200px;" alt="Cover">
+        <p><strong>{{ song?.artist?.name }}</strong></p>
+        <audio [src]="song?.preview" controls class="w-100"></audio>
+      </div>
+
+    </div>
+  </div>
+</div>

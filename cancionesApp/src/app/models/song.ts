@@ -2,6 +2,7 @@ export interface Song {
   id: number;
   title: string;
   artist: {
+    id: number;
     name: string;
     picture: string;
   };

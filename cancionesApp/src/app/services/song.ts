@@ -23,14 +23,18 @@ export class SongService {
   }
 
   getArtistById(id: string) {
-    const url = `${proxy}https://api.deezer.com/artist/${id}`;
+    const url = `${(this.proxy)}https://api.deezer.com/artist/${id}`;
     return this.http.get<any>(url);
   }
 
   getArtistTopTracks(id: string) {
-    const url = `${proxy}https://api.deezer.com/artist/${id}/top?limit=5`;
+    const url = `${(this.proxy)}https://api.deezer.com/artist/${id}/top?limit=5`;
     return this.http.get<any>(url);
   }
 
+  getTopSongs() {
+    const url = `${this.proxy}https://api.deezer.com/chart/0/tracks`
+    return this.http.get<any>(url);
+  }
 
 }
