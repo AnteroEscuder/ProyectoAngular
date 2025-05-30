@@ -1,9 +1,9 @@
-.card {
-  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+.card-gradient {
+  background: var(--card-gradient);
   transition: transform 0.3s ease;
 }
 
-.card:hover {
+.card-gradient:hover {
   transform: translateY(-5px);
 }
 

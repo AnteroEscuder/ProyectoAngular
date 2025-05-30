@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm py-3">
   <div class="container">
 
     <!-- Logo / Marca -->
@@ -15,25 +15,67 @@
       data-bs-target="#navbarContent"
       aria-controls="navbarContent"
       aria-expanded="false"
-      aria-label="Toggle navigation">
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <!-- Menú -->
     <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto gap-2">
+      <ul class="navbar-nav ms-auto gap-3 align-items-center">
+
         <li class="nav-item">
           <a class="nav-link active nav-link-hover" routerLink="/songs">
-            <i class="bi bi-music-player"></i> Canciones
+            <i class="bi bi-music-player-fill me-1"></i> Canciones
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-link-hover" routerLink="/favorites">
+            <i class="bi bi-envelope-paper-fill me-1"></i> Favoritos
+          </a>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link nav-link-hover" routerLink="/contact">
-            <i class="bi bi-envelope-paper"></i> Contacto
+            <i class="bi bi-envelope-paper-fill me-1"></i> Contacto
           </a>
         </li>
+
+        <!-- Separador -->
+        <li><div class="vr mx-3"></div></li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-link-hover" (click)="changeTheme()">
+            <i class="bi bi-envelope-paper-fill me-1"></i> Cambiar Tema
+          </a>
+        </li>
+
+        <li><div class="vr mx-3"></div></li>
+
+        <!-- Usuario y logout -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle d-flex align-items-center"
+            href="#"
+            role="button"
+            id="userMenu"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-person-circle fs-5 me-2"></i>
+            <span class="fw-semibold">Hola, Usuario</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="userMenu">
+            <li>
+              <button class="dropdown-item-logout d-flex align-items-center btn-logout" (click)="logout()">
+                <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+              </button>
+            </li>
+          </ul>
+        </li>
+
       </ul>
     </div>
-
   </div>
 </nav>

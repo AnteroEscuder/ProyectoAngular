@@ -1,24 +1,80 @@
-.navbar-brand:hover {
-  transform: scale(1.05);
-  transition: all 0.3s ease;
+.navbar-custom {
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.6);
 }
 
 .nav-link-hover {
-  position: relative;
+  color: #ddd !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-link-hover:hover {
+  color: #ffca28 !important; /* Amarillo cálido */
+  text-shadow: 0 0 8px #ffca28;
+  text-decoration: none;
+}
+
+.navbar-brand {
+  color: #f8f9fa !important;
+  text-shadow: 0 0 8px #e6e6e6;
+}
+
+.navbar-brand:hover {
+  color: #ffca28 !important;
+  text-shadow: 0 0 12px #ffca28;
+  text-decoration: none;
+}
+
+.vr {
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  height: 30px;
+}
+
+.dropdown-menu {
+  background-color: #1a2733;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.dropdown-item {
+  color: #ccc;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #ffca28;
+  color: #111;
+}
+
+.dropdown-item-logout {
+  color: #ccc;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-logout {
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-logout:hover {
+  box-shadow: 0 0 10px 2px #ffca28;
+  color: #ffca28;
+}
+
+.bi-music-note-beamed,
+.bi-music-player-fill,
+.bi-envelope-paper-fill,
+.bi-person-circle,
+.bi-box-arrow-right {
   transition: color 0.3s ease;
 }
 
-.nav-link-hover::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #fff;
-  transition: width 0.3s ease;
-}
-
-.nav-link-hover:hover::after {
-  width: 100%;
+.nav-link-hover:hover i,
+.btn-logout:hover i {
+  color: #ffca28;
 }

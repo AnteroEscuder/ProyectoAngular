@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="text-center mb-4 mt-4">Mis Favoritos</h2>
+
+  <!-- Mensaje cuando no haya favoritos -->
+  <div *ngIf="favorites.length === 0" class="alert alert-info text-center">
+    No tienes canciones favoritas aún.
+  </div>
+
+  <!-- Lista de canciones favoritas -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let song of favorites" class="col">
+      <div class="card shadow-sm h-100">
+        <img [src]="song.album.cover" class="card-img-top" alt="{{ song.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ song.title }}</h5>
+          <p class="card-text text-muted">{{ song.artist.name }} - {{ song.album.title }}</p>
+
+          <!-- Reproductor de audio -->
+          <audio [src]="song.preview" controls class="w-100 mt-2"></audio>
+
+          <!-- Botón para quitar de favoritos -->
+          <button
+            (click)="toggleFavorite(song)"
+            class="btn btn-outline-danger w-100 mt-3">
+            Quitar de favoritos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

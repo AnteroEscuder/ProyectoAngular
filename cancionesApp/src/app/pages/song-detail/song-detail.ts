@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Song } from '../../models/song';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Song} from '../../models/song';
 import {SongService} from '../../services/song';
 import {CommonModule} from '@angular/common';
-
 
 @Component({
   selector: 'app-song-detail',
@@ -16,51 +15,71 @@ export class SongDetail implements OnInit {
   song: Song | undefined;
   isLoading = true;
   hasError = false;
-
   showArtistModal = false;
   artist: any;
   topTracks: any[] = [];
+  artistError = false;
 
   constructor(
     private route: ActivatedRoute,
     private songService: SongService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.songService.getSongById(id).subscribe({
-        next: (data) => {
-          if (data && !data.error) {
-            this.song = data;
-          } else {
-            this.hasError = true;
-          }
-          this.isLoading = false;
-        },
-        error: (err) => {
-          console.error(err);
-          this.hasError = true;
-          this.isLoading = false;
-        }
-      });
+    const songId = this.route.snapshot.paramMap.get('id');
+    if (songId) {
+      this.loadSongDetails(songId);
+    } else {
+      this.hasError = true;
+      this.isLoading = false;
     }
   }
 
-  openArtistModal(artistId: number) {
-    this.showArtistModal = true;
-
-    this.songService.getArtistById(artistId.toString()).subscribe(data => {
-      this.artist = data;
-    });
-
-    this.songService.getArtistTopTracks(artistId.toString()).subscribe(data => {
-      this.topTracks = data.data;
+  loadSongDetails(id: string): void {
+    this.songService.getSongById(id).subscribe({
+      next: (data) => {
+        if (data && !data.error) {
+          this.song = data;
+        } else {
+          this.hasError = true;
+        }
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.hasError = true;
+        this.isLoading = false;
+      }
     });
   }
 
-  closeArtistModal() {
+  openArtistModal(artistId: number): void {
+    this.showArtistModal = true;
+    this.artistError = false;
+
+    this.songService.getArtistById(artistId.toString()).subscribe({
+      next: (data) => {
+        this.artist = data;
+      },
+      error: (err) => {
+        console.error(err);
+        this.artistError = true;
+      }
+    });
+
+    this.songService.getArtistTopTracks(artistId.toString()).subscribe({
+      next: (data) => {
+        this.topTracks = data.data;
+      },
+      error: (err) => {
+        console.error(err);
+        this.artistError = true;
+      }
+    });
+  }
+
+  closeArtistModal(): void {
     this.showArtistModal = false;
   }
-
 }

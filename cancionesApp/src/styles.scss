@@ -1,0 +1,138 @@
+/* Variables base (modo claro) */
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #212529;
+  --bs-card-bg: #f8f9fa;
+  --bs-card-border-color: #dee2e6;
+  --bs-btn-bg: #0d6efd;
+  --bs-btn-color: #fff;
+  --bs-navbar-bg: #343a40;
+  --bs-navbar-color: #ffffff;
+  --bs-link-color: #0d6efd;
+  --bs-link-hover-color: #0a58ca;
+  --bs-border-color: #dee2e6;
+
+  /* Añadimos variables para inputs y placeholders */
+  --bs-input-bg: #fff;
+  --bs-input-color: #212529;
+  --bs-input-border-color: #ced4da;
+  --bs-input-placeholder-color: #6c757d;
+  --bs-form-text-danger: #dc3545;
+  --card-gradient: linear-gradient(135deg, #ffffff, #f8f9fa);
+  --text-color: #212529;
+}
+
+/* Tema oscuro */
+.dark-theme {
+  --bs-body-bg: #121212;
+  --bs-body-color: #e0e0e0;
+  --bs-card-bg: #1e1e1e;
+  --bs-card-border-color: #2c2c2c;
+  --bs-btn-bg: #bb86fc;
+  --bs-btn-color: #000;
+  --bs-navbar-bg: #212121;
+  --bs-navbar-color: #eeeeee;
+  --bs-link-color: #bb86fc;
+  --bs-link-hover-color: #9a6efc;
+  --bs-border-color: #000000;
+
+  --bs-input-bg: #2c2c2c;
+  --bs-input-color: #e0e0e0;
+  --bs-input-border-color: #555;
+  --bs-input-placeholder-color: #aaa;
+  --bs-form-text-danger: #ff6b6b;
+  --card-gradient: linear-gradient(135deg, #1c1b1b, #2c2c2c);
+  --text-color: #e0e0e0;
+}
+
+/* Aplica las variables de Bootstrap */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.card {
+  background-color: var(--bs-card-bg);
+  border-color: var(--bs-card-border-color);
+  color: var(--bs-body-color);
+}
+
+.btn-primary {
+  background-color: var(--bs-btn-bg);
+  border-color: var(--bs-btn-bg);
+  color: var(--bs-btn-color);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--bs-link-hover-color);
+  border-color: var(--bs-link-hover-color);
+  color: #fff;
+}
+
+.navbar {
+  background-color: var(--bs-navbar-bg) !important;
+  color: var(--bs-navbar-color);
+}
+
+a, a:hover, a:focus {
+  color: var(--bs-link-color);
+}
+
+a:hover {
+  color: var(--bs-link-hover-color);
+}
+
+hr {
+  border-color: var(--bs-border-color);
+}
+
+p {
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+
+/* Estilos para inputs, textarea y labels dentro del formulario */
+input.form-control,
+textarea.form-control,
+select.form-control {
+  background-color: var(--bs-input-bg);
+  color: var(--bs-input-color);
+  border: 1px solid var(--bs-input-border-color);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--bs-input-placeholder-color);
+  opacity: 1;
+}
+
+/* Focus */
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+  background-color: var(--bs-input-bg);
+  border-color: var(--bs-btn-bg);
+  color: var(--bs-input-color);
+  box-shadow: 0 0 5px var(--bs-btn-bg);
+  outline: none;
+}
+
+/* Labels de form-floating */
+.form-floating > label {
+  color: var(--bs-input-placeholder-color);
+}
+
+/* Mensajes de error */
+.form-text.text-danger {
+  color: var(--bs-form-text-danger);
+}
+
+/* Alertas */
+.alert {
+  background-color: var(--bs-card-bg);
+  color: var(--bs-body-color);
+  border-color: var(--bs-card-border-color);
+}
+

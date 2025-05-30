@@ -5,3 +5,32 @@
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
+.btn-outline-danger {
+  border: 1px solid #f44336;
+  color: #f44336;
+  background-color: transparent;
+}
+
+.btn-outline-danger:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favorito {
+  color: #ff4757;
+}
+
+.bi-heart-fill {
+  color: #ff4757;
+}
+
+.bi-heart {
+  color: #6c757d;
+}

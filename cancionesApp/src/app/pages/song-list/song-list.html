@@ -17,29 +17,38 @@
   <!-- Resultados -->
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let song of songs">
-      <a
-        [routerLink]="['/songs', song.id]"
-        class="text-decoration-none text-dark">
-
-        <div class="card h-100 hover-shadow">
+      <div class="card h-100 hover-shadow">
+        <a
+          [routerLink]="['/songs', song.id]"
+          class="text-decoration-none text-dark">
           <img
             [src]="song.album.cover"
             class="card-img-top"
             [alt]="song.title" />
-
           <div class="card-body">
             <h5 class="card-title">{{ song.title }}</h5>
             <p class="card-text">
               {{ song.artist.name }} – {{ song.album.title }}
             </p>
           </div>
+        </a>
 
-          <div class="card-footer bg-white border-top-0">
-            <audio [src]="song.preview" controls class="w-100"></audio>
-          </div>
+        <div class="card-footer bg-theme border-top-0 d-flex justify-content-between align-items-center">
+          <audio [src]="song.preview" controls class="w-100"></audio>
+
+          <!-- Botón de favorito -->
+          <button
+            class="btn btn-outline-danger"
+            (click)="toggleFavorite(song); $event.stopPropagation()"
+            [class.favorito]="favoritesService.isFavorite(song.id)">
+            <i
+              class="bi"
+              [class.bi-heart-fill]="favoritesService.isFavorite(song.id)"
+              [class.bi-heart]="!favoritesService.isFavorite(song.id)">
+            </i>
+          </button>
         </div>
-
-      </a>
+      </div>
     </div>
   </div>
 </div>

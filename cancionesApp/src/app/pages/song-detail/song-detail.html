@@ -1,29 +1,37 @@
+<!-- Cargando -->
 <div class="container mt-4" *ngIf="isLoading">
-  <div class="alert alert-info">Cargando canción...</div>
+  <div class="alert alert-info text-center py-3 shadow-lg rounded-pill d-flex justify-content-center align-items-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <i class="bi bi-arrow-repeat spin"></i> Cargando canción...
+  </div>
 </div>
 
+<!-- Contenido de la canción -->
 <div class="container mt-4" *ngIf="!isLoading && song">
-  <div class="card">
-    <img [src]="song.album.cover" class="card-img-top" alt="{{ song.title }}">
-    <div class="card-body">
-      <h2 class="card-title">{{ song.title }}</h2>
-      <p class="card-text"><strong>Artista:</strong> {{ song.artist.name }}</p>
-      <p class="card-text"><strong>Álbum:</strong> {{ song.album.title }}</p>
-      <audio [src]="song.preview" controls class="w-100"></audio>
-      <!-- Botón para abrir el modal -->
-      <button
-        class="btn btn-info mt-3"
-        *ngIf="song?.artist?.id"
-        (click)="openArtistModal(song.artist.id)">
-        Ver artista
-      </button>
-      <!-- Modal de Bootstrap -->
+  <div class="d-flex justify-content-center">
+    <div class="card shadow-lg rounded-4 border-0" style="max-width: 500px;">
+      <img [src]="song.album.cover" class="card-img-top rounded-4" alt="{{ song.title }}">
+      <div class="card-body">
+        <h2 class="card-title text-center text-primary">{{ song.title }}</h2>
+        <p class="card-text text-muted text-center"><strong>Artista:</strong> {{ song.artist.name }}</p>
+        <p class="card-text text-muted text-center"><strong>Álbum:</strong> {{ song.album.title }}</p>
+        <audio [src]="song.preview" controls class="w-100 mt-3 rounded-3 shadow-sm"></audio>
+        <!-- Botón para abrir el modal -->
+        <button
+          class="btn btn-outline-info mt-3 rounded-pill w-100"
+          *ngIf="song?.artist?.id"
+          (click)="openArtistModal(song.artist.id)">
+          <i class="bi bi-person-circle"></i> Ver artista
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Error -->
 <div class="container mt-4" *ngIf="!isLoading && hasError">
-  <div class="alert alert-danger">Canción no encontrada.</div>
+  <div class="alert alert-danger text-center shadow-lg rounded-pill">
+    <i class="bi bi-x-circle"></i> Canción no encontrada.
+  </div>
 </div>
 
 <!-- Fondo oscuro detrás del modal -->
@@ -51,19 +59,20 @@
       </div>
 
       <div class="modal-body text-center" *ngIf="artist">
-        <img [src]="artist.picture_big" class="img-fluid rounded mb-4 shadow" alt="Imagen del artista" style="max-height: 300px; object-fit: cover;">
+        <img [src]="artist.picture_big" class="img-fluid rounded mb-4 shadow-lg" alt="Imagen del artista" style="max-height: 300px; object-fit: cover;">
 
-        <h6 class="mb-3">Top canciones</h6>
+        <h6 class="mb-3 text-primary">Top canciones</h6>
 
+        <!-- Mostrar las canciones top del artista -->
         <ul class="list-group list-group-flush overflow-auto" style="max-height: 300px;">
-          <li class="list-group-item" *ngFor="let track of topTracks">
-            <strong>{{ track.title }}</strong>
-            <audio class="w-100 mt-2" [src]="track.preview" controls></audio>
+          <li class="list-group-item" *ngFor="let topTrack of topTracks">
+            <strong>{{ topTrack.title }}</strong>
+            <audio class="w-100 mt-2" [src]="topTrack.preview" controls></audio>
           </li>
         </ul>
+
       </div>
 
     </div>
   </div>
 </div>
-
