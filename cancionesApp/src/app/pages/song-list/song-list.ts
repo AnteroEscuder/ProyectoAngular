@@ -18,6 +18,7 @@ import {CommonModule} from '@angular/common';
 })
 export class SongList implements OnInit {
   songs: Song[] = [];
+  tempSongs: Song[] = [];
   query: string = 'queen';
 
   constructor(
@@ -32,10 +33,20 @@ export class SongList implements OnInit {
   searchSongs(): void {
     if (this.query.trim()) {
       this.songService.searchSongs(this.query).subscribe(data => {
-        console.log(data)
-        this.songs = data;
+        this. tempSongs = data;
+        this.checkFavorites();
+        this.songs = this.tempSongs;
       });
     }
+  }
+
+  checkFavorites() {
+    const favorites = this.favoritesService.getFavorites();
+    const favoriteIds = new Set(favorites.map(f => f.id));
+
+    this.tempSongs.forEach(song => {
+      song.fav = favoriteIds.has(song.id);
+    });
   }
 
   filterSongsByName(type: string): void {

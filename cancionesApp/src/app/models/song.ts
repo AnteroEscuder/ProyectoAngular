@@ -1,4 +1,5 @@
 export interface Song {
+  fav: boolean;
   id: number;
   title: string;
   artist: {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import { AlertaComponent } from '../../components/alerta/alerta';
 import emailjs from '@emailjs/browser';
 
@@ -32,6 +32,7 @@ export class Contact {
       this.errores.push('El email no es válido.');
     }
 
+
     if (!this.mensaje.trim()) {
       this.errores.push('El mensaje es obligatorio.');
     } else if (this.mensaje.length < 10) {
@@ -41,20 +42,29 @@ export class Contact {
     return this.errores.length === 0;
   }
 
-  enviarFormulario(event: Event) {
+  enviarFormulario(event: Event, form: NgForm) {
     event.preventDefault();
+
     if (this.validarFormulario()) {
-      emailjs.sendForm(
+      const templateParams = {
+        nombre: this.nombre,
+        email: this.email,
+        mensaje: this.mensaje,
+      };
+
+      emailjs.send(
         'service_xqn4mdq',
         'template_an6al38',
-        event.target as HTMLFormElement,
+        templateParams,
         'wZoyUVIajkB27a1jd'
       ).then(() => {
         this.sended = true;
         this.nombre = '';
         this.email = '';
         this.mensaje = '';
-      }, (error) => {
+
+        form.resetForm();
+      }).catch((error) => {
         console.error('Error al enviar:', error);
         this.errores.push('Error al enviar el formulario. Inténtalo de nuevo más tarde.');
       });

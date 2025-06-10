@@ -49,16 +49,12 @@
           <audio [src]="song.preview" controls class="w-100"></audio>
 
           <!-- Botón de favorito -->
-          <button
-            class="btn btn-outline-danger"
-            (click)="toggleFavorite(song); $event.stopPropagation()"
-            [class.favorito]="favoritesService.isFavorite(song.id)">
-            <i
-              class="bi"
-              [class.bi-heart-fill]="favoritesService.isFavorite(song.id)"
-              [class.bi-heart]="!favoritesService.isFavorite(song.id)">
+
+            <i class="bi ms-3 fs-4"
+               (click)="toggleFavorite(song); $event.stopPropagation()"
+               [class.bi-heart-fill]="favoritesService.isFavorite(song.id)"
+               [class.bi-heart]="!favoritesService.isFavorite(song.id)">
             </i>
-          </button>
         </div>
       </div>
     </div>
