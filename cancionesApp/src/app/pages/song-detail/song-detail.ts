@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Song} from '../../models/song';
 import {SongService} from '../../services/song';
 import {CommonModule} from '@angular/common';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-song-detail',
@@ -11,7 +12,7 @@ import {CommonModule} from '@angular/common';
   templateUrl: './song-detail.html',
   styleUrl: './song-detail.scss'
 })
-export class SongDetail implements OnInit {
+export class SongDetail implements OnInit, OnDestroy {
   song: Song | undefined;
   isLoading = true;
   hasError = false;
@@ -19,6 +20,7 @@ export class SongDetail implements OnInit {
   artist: any;
   topTracks: any[] = [];
   artistError = false;
+  private routerSub: Subscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,12 +29,24 @@ export class SongDetail implements OnInit {
   }
 
   ngOnInit(): void {
-    const songId = this.route.snapshot.paramMap.get('id');
-    if (songId) {
-      this.loadSongDetails(songId);
-    } else {
-      this.hasError = true;
-      this.isLoading = false;
+    // const songId = this.route.snapshot.paramMap.get('id');
+    // if (songId) {
+    //   this.loadSongDetails(songId);
+    // } else {
+    //   this.hasError = true;
+    //   this.isLoading = false;
+    // }
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.loadSongDetails(id)
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    if (this.routerSub) {
+      this.routerSub.unsubscribe();
     }
   }
 

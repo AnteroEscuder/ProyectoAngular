@@ -14,6 +14,18 @@
     </div>
   </form>
 
+  <div class="d-flex justify-content-end mb-5">
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+        Filtrar por titulo
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <span (click)="filterSongsByName('asc')" class="dropdown-item" href="#">Ascendente</span>
+        <span (click)="filterSongsByName('desc')" class="dropdown-item" href="#">Descendente</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Resultados -->
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let song of songs">

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlertaComponent } from '../../components/alerta/alerta';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-contact',
@@ -40,18 +41,23 @@ export class Contact {
     return this.errores.length === 0;
   }
 
-  enviarFormulario() {
+  enviarFormulario(event: Event) {
+    event.preventDefault();
     if (this.validarFormulario()) {
-      console.log('Formulario enviado:', {
-        nombre: this.nombre,
-        email: this.email,
-        mensaje: this.mensaje
+      emailjs.sendForm(
+        'service_xqn4mdq',
+        'template_an6al38',
+        event.target as HTMLFormElement,
+        'wZoyUVIajkB27a1jd'
+      ).then(() => {
+        this.sended = true;
+        this.nombre = '';
+        this.email = '';
+        this.mensaje = '';
+      }, (error) => {
+        console.error('Error al enviar:', error);
+        this.errores.push('Error al enviar el formulario. Inténtalo de nuevo más tarde.');
       });
-
-      this.sended = true;
-      this.nombre = '';
-      this.email = '';
-      this.mensaje = '';
     }
   }
 

@@ -7,18 +7,28 @@
       CancionesApp
     </a>
 
-    <!-- Botón responsive -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-      aria-controls="navbarContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Barra de búsqueda -->
+    <form class="d-flex ms-auto" (ngSubmit)="onSearch()">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Buscar canciones"
+        [(ngModel)]="query"
+        name="query"
+        aria-label="Search"
+        (input)="onSearch()"
+      />
+      <div
+        class="dropdown-menu2 mt-5"
+        *ngIf="filteredSongs.length > 0"
+        [ngClass]="{'d-block': filteredSongs.length > 0, 'dropdown-menu-show': filteredSongs.length > 0}">
+        <button
+          *ngFor="let song of filteredSongs"
+          class="dropdown-item" (click)="closeDropdown(song.id)">
+          {{ song.title }} - {{ song.artist.name }}
+        </button>
+      </div>
+    </form>
 
     <!-- Menú -->
     <div class="collapse navbar-collapse" id="navbarContent">
@@ -32,7 +42,7 @@
 
         <li class="nav-item">
           <a class="nav-link nav-link-hover" routerLink="/favorites">
-            <i class="bi bi-envelope-paper-fill me-1"></i> Favoritos
+            <i class="bi bi-heart-fill me-1"></i> Favoritos
           </a>
         </li>
 
@@ -47,7 +57,7 @@
 
         <li class="nav-item">
           <a class="nav-link nav-link-hover" (click)="changeTheme()">
-            <i class="bi bi-envelope-paper-fill me-1"></i> Cambiar Tema
+            <i class="bi bi-moon-stars-fill me-1"></i> Cambiar Tema
           </a>
         </li>
 

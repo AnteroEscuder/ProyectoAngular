@@ -19,7 +19,7 @@
       <div class="card-gradient shadow-lg rounded-4 border-0">
         <div class="card-body p-5">
           <h2 class="text-center mb-4">Contáctanos</h2>
-          <form #contactForm="ngForm" (ngSubmit)="enviarFormulario()" novalidate>
+          <form #contactForm="ngForm" (ngSubmit)="enviarFormulario($event)" novalidate>
 
             <!-- Nombre -->
             <div class="form-floating mb-4">

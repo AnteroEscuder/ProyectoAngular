@@ -32,8 +32,17 @@ export class SongList implements OnInit {
   searchSongs(): void {
     if (this.query.trim()) {
       this.songService.searchSongs(this.query).subscribe(data => {
+        console.log(data)
         this.songs = data;
       });
+    }
+  }
+
+  filterSongsByName(type: string): void {
+    if (type === 'asc') {
+      this.songs.sort((a,b) => a.title.localeCompare(b.title));
+    } else  {
+      this.songs.sort((a,b) => b.title.localeCompare(a.title));
     }
   }
 
